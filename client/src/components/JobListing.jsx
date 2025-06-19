@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../context/AppContext';
 import close_icon from "../assets/close_icon.svg";
-import { JobCategories, jobsData } from '../assets/assests';
+import { JobCategories } from '../assets/assests';
 import { JobLocations } from '../assets/assests';
 import JobCard from './JobCard';
 
 const JobListing = () => {
 
-    const { searchFilter, isSearched, setSearchFilter } = useContext(AppContext);
+    const { searchFilter, isSearched, setSearchFilter, jobs } = useContext(AppContext);
     return (
         <div className='container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8'>
             {/* Sidebar */}
@@ -70,7 +70,7 @@ const JobListing = () => {
                 <p className='mb-8'>Get your desired job from top companies</p>
                 <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
                     {
-                        jobsData.map((job, index) => (
+                        jobs.map((job, index) => (
                             <JobCard key={index} job={job} />
                         ))}
                 </div>
