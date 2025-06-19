@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../context/AppContext';
 import close_icon from "../assets/close_icon.svg";
+import { JobCategories } from '../assets/assests';
+import { JobLocations } from '../assets/assests';
 
 const JobListing = () => {
 
@@ -31,6 +33,34 @@ const JobListing = () => {
                         </>
                     )
                 }
+                {/* Category Filter */}
+                <div className='max-lg:hidden'>
+                    <h4 className='font-medium text-lg py-4'>Search by Categories</h4>
+                    <ul className='space-y-4 text-gray-600'>
+                        {
+                            JobCategories.map((category, index)=>(
+                                <li className='flex gap-3 items-center' key={index}>
+                                    <input className='scale-125 cursor-pointer' type="checkbox" name="" id="" />
+                                    {category}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+                {/* Location Filter */}
+                <div className='max-lg:hidden'>
+                    <h4 className='font-medium text-lg py-4'>Search by Location</h4>
+                    <ul className='space-y-4 text-gray-600'>
+                        {
+                            JobLocations.map((location, index)=>(
+                                <li className='flex gap-3 items-center' key={index}>
+                                    <input className='scale-125 cursor-pointer' type="checkbox" name="" id="" />
+                                    {location}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     )
