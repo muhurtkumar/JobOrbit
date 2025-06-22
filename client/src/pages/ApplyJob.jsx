@@ -9,6 +9,8 @@ import person_icon from "../assets/person_icon.svg";
 import money_icon from "../assets/money_icon.svg";
 import kconvert from 'k-convert';
 import moment from "moment";
+import JobCard from "../components/JobCard";
+import Footer from "../components/Footer";
 
 const ApplyJob = () => {
   const { id } = useParams();
@@ -66,14 +68,23 @@ const ApplyJob = () => {
             </div>
           </div>
           <div className="flex flex-col lg:flex-row justify-between items-start">
+            {/* Left Section - Displaying jobs description */}
             <div className="w-full lg:w-2/3">
               <h2 className="font-bold text-2xl mb-4">Job Description</h2>
               <div className="rich-text" dangerouslySetInnerHTML={{__html:JobData.description}}></div>
               <button className="bg-blue-600 p-2.5 px-10 text-white rounded mt-10">Apply Now</button>
             </div>
+            {/* Right Section - Displaying more jobs from company */}
+            <div className="w-full lg:w-1/3 lg:mt-0 lg:ml-8 mt-8 space-y-5">
+              <h2>More jobs from {JobData.companyId.name}</h2>
+              {jobs.filter(job => job._id !== JobData._id && job.companyId._id === JobData.companyId._id)
+              .filter( job => true).slice(0,4)
+              .map((job, index)=> <JobCard key={index} job={job} />)}
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   ) : (
     <Loading />
