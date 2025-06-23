@@ -781,3 +781,47 @@ export const jobsData = [
         category: "Programming",
     }
 ];
+
+// Sample data for Profile Page
+export const jobsApplied = [
+    {
+        company: 'Amazon',
+        title: 'Full Stack Developer',
+        location: 'Bangalore',
+        date: '22 May, 2025',
+        status: 'Pending',
+        logo: company_icon,
+    },
+    {
+        company: 'Meta',
+        title: 'Data Scientist',
+        location: 'San Francisco',
+        date: '22 May, 2025',
+        status: 'Rejected',
+        logo: company_icon,
+    },
+    {
+        company: 'Google',
+        title: 'Marketing Manager',
+        location: 'London',
+        date: '25 May, 2025',
+        status: 'Accepted',
+        logo: company_icon,
+    },
+    {
+        company: 'Qualcomm',
+        title: 'UI/UX Designer',
+        location: 'Dubai',
+        date: '15 Jun, 2025',
+        status: 'Pending',
+        logo: company_icon,
+    },
+    {
+        company: 'Microsoft',
+        title: 'Full Stack Developer',
+        location: 'Hyderabad',
+        date: '15 June, 2025',
+        status: 'Accepted',
+        logo: company_icon,
+    },
+];
