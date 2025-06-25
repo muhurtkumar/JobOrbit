@@ -837,3 +837,11 @@ export const viewApplicationsPageData = [
     { _id: 6, name: "Suyash Bajpai", jobTitle: "Data Scientist", location: "New Delhi", imgSrc: profile_img },
     { _id: 7, name: "Diya Singh", jobTitle: "Marketing Manager", location: "Chennai", imgSrc: profile_img },
 ];
+
+// Sample data for Manage Jobs Page
+export const manageJobsData = [
+    { _id: 1, title: "Full Stack Developer", date: 1750819200000, location: "Bangalore", applicants: 20 },
+    { _id: 2, title: "Data Scientist", date: 1750819200000, location: "San Francisco", applicants: 15 },
+    { _id: 3, title: "Marketing Manager", date: 1750819200000, location: "London", applicants: 2 },
+    { _id: 4, title: "UI/UX Designer", date: 1750819200000, location: "Dubai", applicants: 25 }
+];
