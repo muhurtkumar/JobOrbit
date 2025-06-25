@@ -1,4 +1,5 @@
 import company_icon from './company_icon.svg';
+import profile_img from './profile_img.png';
 
 export const JobCategories = [
     "Programming",
@@ -824,4 +825,15 @@ export const jobsApplied = [
         status: 'Accepted',
         logo: company_icon,
     },
+];
+
+// Sample data for View Applications Page
+export const viewApplicationsPageData = [
+    { _id: 1, name: "Yash Singh Chauhan", jobTitle: "Full Stack Developer", location: "Bangalore", imgSrc: profile_img },
+    { _id: 2, name: "Rahima Khan", jobTitle: "Data Scientist", location: "San Francisco", imgSrc: profile_img },
+    { _id: 3, name: "Pranjal Bajpai", jobTitle: "Marketing Manager", location: "London", imgSrc: profile_img },
+    { _id: 4, name: "Yash Verma", jobTitle: "UI/UX Designer", location: "Dubai", imgSrc: profile_img },
+    { _id: 5, name: "Tanuja Kandpal", jobTitle: "Full Stack Developer", location: "Hyderabad", imgSrc: profile_img },
+    { _id: 6, name: "Suyash Bajpai", jobTitle: "Data Scientist", location: "New Delhi", imgSrc: profile_img },
+    { _id: 7, name: "Diya Singh", jobTitle: "Marketing Manager", location: "Chennai", imgSrc: profile_img },
 ];
