@@ -52,7 +52,40 @@ export const registerCompany = async (req, res) => {
 
 // Company Login
 export const loginCompany = async (req, res) => {
+    const {email, password} = req.body;
 
+    try {
+        if(!email || !password) {
+            return res.status(400).json({success:false, message: "All fields are required" });
+        }
+
+        const company = await Company.findOne({email})
+        if(!company) {
+            return res.status(400).json({success:false, message: "Company not registered" });
+        }
+
+        if(bcrypt.compare(password, company.password)){
+            res.status(200).json({
+                success: true,
+                message: "Company logged in successfully",
+                company: {
+                    id: company._id,
+                    name: company.name,
+                    email: company.email,
+                    image: company.image
+                },
+                token: generateToken(company._id)
+            });
+        }
+        else{
+            return res.status(400).json({success:false, message: "Invalid email or password" });
+        }
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        })
+    }
 }
 
 // Get Company  Data
