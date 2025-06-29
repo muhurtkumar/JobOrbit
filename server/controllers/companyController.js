@@ -89,9 +89,21 @@ export const loginCompany = async (req, res) => {
     }
 }
 
-// Get Company  Data
+// Get Company  Data (Display Company Profile in Navbar)
 export const getCompanyData = async (req, res) => {
 
+    try {
+        const company = req.company;
+        res.json({
+            success: true,
+            company
+        })
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        })
+    }
 }
 
 // Post a new job
@@ -137,7 +149,19 @@ export const getCompanyJobApplicants = async (req, res) => {
 
 // Get Company Posted Jobs
 export const getCompanyPostedJobs = async (req, res) => {
+    try {
+        const companyId = req.company._id
+        const jobs = await Job.find({companyId})
+        
+        // (ToDo) Adding No. of applicants info in data
 
+        res.json({
+            success: true,
+            jobsData: jobs
+        })
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
 }
 
 // Change Job Application Status (e.g., Accepted, Rejected)
