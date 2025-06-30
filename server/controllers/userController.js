@@ -1,5 +1,6 @@
 import JobApplication from "../models/jobApplication.js"
 import User from "../models/User.js"
+import {v2 as cloudinary} from 'cloudinary';
 
 // Get user data
 export const getUserData = async (req, res) => {
@@ -50,10 +51,41 @@ export const applyForJob = async (req, res) => {
 
 // Get user applied jobs
 export const getUserJobApplications = async (req, res) => {
+    try {
+        const userId = req.auth.userId;
 
+        const applications = await JobApplication.find({userId})
+        .populate('companyId', 'name email image')
+        .populate('jobId', 'title description location category level salary')
+        .exec();
+
+        if(!applications){
+            return res.status(404).json({success: false, message: "No job applications found!"});
+        }
+
+        return res.json({success: true, applications});
+    } catch (error) {
+        res.json({success: false, message: error.message});
+    }
 }
 
 // Update user profile (resume)
 export const updateUserResume = async (req, res) => {
+    try {
+        const userId = req.auth.userId;
+        const resumeFile = req.file;
 
+        const userData = await User.findById(userId);
+
+        if(resumeFile){
+            const resumeUpload = await cloudinary.uploader.upload(resumeFile.path) // will upload the resume to cloudinary
+            userData.resume = resumeUpload.secure_url;
+        }
+
+        await userData.save();
+
+        return res.json({success: true, message: "Resume updated successfully!"});
+    } catch (error) {
+        res.json({success: false, message: error.message});
+    }
 }
