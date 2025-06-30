@@ -10,13 +10,13 @@ export const registerCompany = async (req, res) => {
     const imageFile = req.file;
 
     if(!name || !email || !password || !imageFile) {
-        return res.status(400).json({success:false, message: "All fields are required" });
+        return res.json({success:false, message: "All fields are required" });
     }
 
     try {
         const companyExist = await Company.findOne({ email });
         if(companyExist) {
-            return res.status(400).json({success:false, message: "Company already registered" });
+            return res.json({success:false, message: "Company already registered" });
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -57,15 +57,15 @@ export const loginCompany = async (req, res) => {
 
     try {
         if(!email || !password) {
-            return res.status(400).json({success:false, message: "All fields are required" });
+            return res.json({success:false, message: "All fields are required" });
         }
 
         const company = await Company.findOne({email})
         if(!company) {
-            return res.status(400).json({success:false, message: "Company not registered" });
+            return res.json({success:false, message: "Company not registered" });
         }
 
-        if(bcrypt.compare(password, company.password)){
+        if(await bcrypt.compare(password, company.password)){
             res.status(200).json({
                 success: true,
                 message: "Company logged in successfully",
@@ -79,7 +79,7 @@ export const loginCompany = async (req, res) => {
             });
         }
         else{
-            return res.status(400).json({success:false, message: "Invalid email or password" });
+            return res.json({success:false, message: "Invalid email or password" });
         }
     } catch (error) {
         res.json({
@@ -111,7 +111,7 @@ export const postJob = async (req, res) => {
     const {title, description, location, category, level, salary} = req.body;
 
     if(!title || !description || !location || !category || !level || !salary) {
-        return res.status(400).json({success:false, message: "All fields are required" });
+        return res.json({success:false, message: "All fields are required" });
     }
 
     const companyId = req.company._id;
