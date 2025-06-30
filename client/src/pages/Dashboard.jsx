@@ -7,6 +7,7 @@ import home_icon from '../assets/home_icon.svg'
 import person_tick_icon from '../assets/person_tick_icon.svg'
 import { useContext } from 'react'
 import { AppContext } from '../context/AppContext'
+import { useEffect } from 'react'
 
 const Dashboard = () => {
 
@@ -21,6 +22,12 @@ const Dashboard = () => {
         setCompanyData(null);
         navigate('/');
     }
+
+    useEffect(() => {
+        if(companyData){
+            navigate('/dashboard/manage-jobs');
+        }
+    }, [companyData])
      
     return (
         <div className='min-h-screen'>
