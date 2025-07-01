@@ -9,6 +9,7 @@ import { AppContext } from '../context/AppContext';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const Applications = () => {
 
@@ -18,7 +19,7 @@ const Applications = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [resume, setResume] = useState(null);
 
-  const {backendUrl, userData, userApplications, fetchUserData} = useContext(AppContext);
+  const {backendUrl, userData, userApplications, fetchUserData, fetchUserApplications} = useContext(AppContext);
 
   const updateResume = async () => {
     try {
@@ -47,6 +48,12 @@ const Applications = () => {
     setResume(null);
   }
 
+  useEffect(() => {
+    if(user){
+      fetchUserApplications();
+    }
+  }, [user])
+
   return (
     <>
       <Navbar />
@@ -64,7 +71,7 @@ const Applications = () => {
                 <button onClick={updateResume} className='bg-red-100 border border-red-400 rounded-lg px-4 py-2'>Save</button>
             </>
             : <div className='flex gap-2'>
-                <a className='bg-blue-100 text-blue-600 px-4 py-2 rounded-lg' href="">
+                <a target="_blank" href={userData.resume}  className='bg-blue-100 text-blue-600 px-4 py-2 rounded-lg'>
                   Resume
                 </a>
                 <button onClick={()=> setIsEdit(true)} className='text-gray-500 border border-gray-300 rounded-lg px-4 py-2'>Edit</button> 
